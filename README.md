@@ -4,7 +4,7 @@
 
 **etcd-prepopulate.bash** will create the keys that our microservices need with the default values. This has to be called when docker volume is first created.
 
-To start the etcd container for the first time, run:
+To start the etcd container, run:
 
 ````
 ./etcd-startup.bash
