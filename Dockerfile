@@ -3,6 +3,6 @@ MAINTAINER Nejc Kisek "nk4741@student.uni-lj.si"
 EXPOSE 2379:2379
 EXPOSE 2380:2380
 
-ADD etcd-startup.sh /usr/bin/etcd-startup.sh
+ADD docker/etcd-startup.sh /usr/bin/etcd-startup.sh
 
 CMD /bin/sh /usr/bin/etcd-startup.sh

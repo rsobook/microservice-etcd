@@ -39,6 +39,21 @@ docker {
     }
 }
 
+task dockerfileCreate(type: Dockerfile) {
+    group 'docker'
+    destFile = project.file('docker/Dockerfile')
+
+    from 'gcr.io/etcd-development/etcd:v3.2.9'
+    maintainer 'Nejc Kisek "nk4741@student.uni-lj.si"'
+    exposePort {"2379:2379"}
+    exposePort {"2380:2380"}
+
+    addFile("etcd-startup.sh", "/usr/bin/etcd-startup.sh")
+
+    defaultCommand('/bin/sh', '/usr/bin/etcd-startup.sh')
+}
+
+
 task containerStop(type: DockerStopContainer) {
     group 'docker'
     targetContainerId {
@@ -72,9 +87,8 @@ task imageRemove(type: DockerRemoveImage) {
 task imageBuild(type: DockerBuildImage) {
     group 'docker'
     dependsOn imageRemove
-    //dependsOn dockerfileCreate
-    //inputDir = dockerfileCreate.destFile.parentFile
-    inputDir = file('.')
+    dependsOn dockerfileCreate
+    inputDir = dockerfileCreate.destFile.parentFile
     tag = dockerImageTag
     //noCache = true
 }

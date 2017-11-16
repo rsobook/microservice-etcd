@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: rsobook-etcd
+  name: microservice-etcd
 spec:
   replicas: 1
   template:
