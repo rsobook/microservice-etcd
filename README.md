@@ -1,26 +1,5 @@
-# etcd scripts for RsoBook
+# RsoBook etcd
 
-**etcd-startup.bash** will create a new docker volume "rsobook-etcd-data" and use it for an etcd config server in a new docker container named "rsobook_etcd". If the volume "rsobook-etcd-data" already exists, it is reused (configuration is preserved even when container is deleted).
+Dockerfile takes the image from gcr.io/etcd-development/etcd:v3.2.9 and adds a custom startup script (*etcd-startup.sh*) to it.
 
-**etcd-prepopulate.bash** will create the keys that our microservices need with the default values. This has to be called when docker volume is first created.
-
-To start the etcd container for the first time, run:
-
-````
-./etcd-startup.bash
-````
-
-To stop/resume the container, run:
-
-````
-docker stop rsobook_etcd
-````
-
-
-To remove the container and delete all values, run:
-
-````
-docker stop rsobook_etcd
-docker rm rsobook_etcd
-docker volume rm rsobook-etcd-data
-````
+The startup script will start etcd, wait 10 seconds and set all the default values. Default values can be changed inside the script.
