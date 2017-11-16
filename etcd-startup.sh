@@ -18,7 +18,7 @@ echo ""
     etcdctl mk environments/dev/services/microservice-friends/1.0.0/config/properties/lists/friends 10
     etcdctl mk environments/dev/services/microservice-pet/1.0.0/config/properties/lists/pets 10
     etcdctl mk environments/dev/services/microservice-chatrelay/1.0.0/config/properties/msg/maxchatusers 5
-    etcdctl mk environments/dev/services/microservice-image/1.0.0/config/properties/maxsize 2000000
+    etcdctl mk environments/dev/services/microservice-images/1.0.0/config/properties/maxsize 2000000
 
     echo ""
     echo "Current keys and values:"

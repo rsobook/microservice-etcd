@@ -1,0 +1,114 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-docker-plugin:3.2.0'
+    }
+}
+
+apply plugin: 'com.bmuschko.docker-remote-api'
+
+ext {
+    dockerHubUser =  project.hasProperty('DOCKER_HUB_USER') ? DOCKER_HUB_USER : System.getenv('DOCKER_HUB_USER')
+    dockerHubEmail =  project.hasProperty('DOCKER_HUB_EMAIL') ? DOCKER_HUB_EMAIL : System.getenv('DOCKER_HUB_EMAIL')
+    dockerHubPassword =  project.hasProperty('DOCKER_HUB_PASSWORD') ? DOCKER_HUB_PASSWORD : System.getenv('DOCKER_HUB_PASSWORD')
+
+    port1 = "2379"
+    port2 = "2380"
+    dockerHostname = 'etcd.rsobook.fri.si'
+    dockerImageName = String.format("%s/%s", dockerHubUser, project.name)
+    dockerImageTag = String.format("%s:%s", dockerImageName, "1.0")
+    dockerContainerName = String.format("%s", project.name)
+}
+
+/**
+ * DOCKER TASKS
+ */
+
+import com.bmuschko.gradle.docker.tasks.container.*
+import com.bmuschko.gradle.docker.tasks.image.*
+
+docker {
+    registryCredentials {
+        url = 'https://hub.docker.com/'
+        email = dockerHubEmail
+        password = dockerHubPassword
+        username = dockerHubUser
+    }
+}
+
+task containerStop(type: DockerStopContainer) {
+    group 'docker'
+    targetContainerId {
+        dockerContainerName
+    }
+    onError {
+        error -> println error.toString()
+    }
+}
+
+task containerRemove(type: DockerRemoveContainer) {
+    group 'docker'
+    dependsOn containerStop
+    targetContainerId {
+        dockerContainerName
+    }
+    onError {
+        error -> println error.toString()
+    }
+}
+
+task imageRemove(type: DockerRemoveImage) {
+    group 'docker'
+    dependsOn containerRemove
+    imageId dockerImageTag
+    onError {
+        error -> println error.toString()
+    }
+}
+
+task imageBuild(type: DockerBuildImage) {
+    group 'docker'
+    dependsOn imageRemove
+    //dependsOn dockerfileCreate
+    //inputDir = dockerfileCreate.destFile.parentFile
+    inputDir = file('.')
+    tag = dockerImageTag
+    //noCache = true
+}
+
+task imagePushToDockerHub(type: DockerPushImage){
+    group 'docker'
+    imageName = dockerImageName
+    tag = "1.0"
+}
+
+task containerCreate(type: DockerCreateContainer) {
+    group 'docker'
+    dependsOn imageBuild
+    targetImageId {
+        dockerImageTag
+    }
+    containerName = dockerContainerName
+    portBindings = [String.format("%s:%s", port1, port1), String.format("%s:%s", port2, port2)]
+    hostName = dockerHostname
+    network = 'rsonetwork'
+}
+
+task containerStart(type: DockerStartContainer) {
+    group 'docker'
+    targetContainerId {
+        dockerContainerName
+    }
+}
+
+task dockerBootstrap() {
+    group 'docker'
+    dependsOn containerCreate
+    dependsOn containerStart
+    containerCreate.finalizedBy containerStart
+}
+
+
