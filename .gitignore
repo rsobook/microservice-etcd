@@ -1,3 +1,5 @@
 .idea
 .gradle
 gradle.properties
+docker/Dockerfile
+*.iml

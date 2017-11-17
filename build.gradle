@@ -17,6 +17,7 @@ ext {
 
     port1 = "2379"
     port2 = "2380"
+
     dockerHostname = 'etcd.rsobook.fri.si'
     dockerImageName = String.format("%s/%s", dockerHubUser, project.name)
     dockerImageTag = String.format("%s:%s", dockerImageName, "1.0")
@@ -45,8 +46,13 @@ task dockerfileCreate(type: Dockerfile) {
 
     from 'gcr.io/etcd-development/etcd:v3.2.9'
     maintainer 'Nejc Kisek "nk4741@student.uni-lj.si"'
-    exposePort {"2379:2379"}
-    exposePort {"2380:2380"}
+
+    exposePort {
+        String.format("5%s:%s", port1, port1)
+    }
+    exposePort {
+        String.format("5%s:%s", port2, port2)
+    }
 
     addFile("etcd-startup.sh", "/usr/bin/etcd-startup.sh")
 
@@ -106,7 +112,7 @@ task containerCreate(type: DockerCreateContainer) {
         dockerImageTag
     }
     containerName = dockerContainerName
-    portBindings = [String.format("%s:%s", port1, port1), String.format("%s:%s", port2, port2)]
+    portBindings = [String.format("5%s:%s", port1, port1), String.format("5%s:%s", port2, port2)]
     hostName = dockerHostname
     network = 'rsonetwork'
 }

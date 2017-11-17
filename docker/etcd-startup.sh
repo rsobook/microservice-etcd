@@ -13,12 +13,13 @@ echo ""
     echo ""
     echo "Prepopulating values"
 
-    etcdctl mk environments/dev/services/microservice-ads/1.0.0/config/properties/ads/enabled false
-    etcdctl mk environments/dev/services/microservice-user/1.0.0/config/properties/lists/users 10
-    etcdctl mk environments/dev/services/microservice-friends/1.0.0/config/properties/lists/friends 10
-    etcdctl mk environments/dev/services/microservice-pet/1.0.0/config/properties/lists/pets 10
-    etcdctl mk environments/dev/services/microservice-chatrelay/1.0.0/config/properties/msg/maxchatusers 5
-    etcdctl mk environments/dev/services/microservice-images/1.0.0/config/properties/maxsize 2000000
+    etcdctl mk environments/dev/services/microservice-ads/1.0.0/config/properties/ads-enabled false
+    etcdctl mk environments/dev/services/microservice-user/1.0.0/config/properties/lists-users 10
+    etcdctl mk environments/dev/services/microservice-friends/1.0.0/config/properties/lists-friends 10
+    etcdctl mk environments/dev/services/microservice-pet/1.0.0/config/properties/lists-pets 10
+    etcdctl mk environments/dev/services/microservice-chatrelay/1.0.0/config/properties/max-chat-users 5
+    etcdctl mk environments/dev/services/microservice-images/1.0.0/config/properties/max-size 2000000
+    etcdctl mk environments/dev/services/microservice-wall/1.0.0/config/properties/max-wall-posts 5
 
     echo ""
     echo "Current keys and values:"
