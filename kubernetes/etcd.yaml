@@ -7,11 +7,11 @@ spec:
   template:
     metadata:
       labels:
-        app: etcd
+        app: microservice-etcd
     spec:
       containers:
       - image: rsobook/microservice-etcd
-        name: etcd
+        name: microservice-etcd
         ports:
         - containerPort: 2379
           name: client
