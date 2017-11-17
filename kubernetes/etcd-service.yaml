@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: microservice-etcd
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
   - name: client
     port: 2379
     protocol: TCP
     targetPort: 2379
   selector:
-    app: etcd
+    app: microservice-etcd
