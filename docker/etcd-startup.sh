@@ -18,6 +18,7 @@ echo ""
     etcdctl mk environments/dev/services/ms.friends/1.0.0/config/properties/lists-friends 10
     etcdctl mk environments/dev/services/ms.pet/1.0.0/config/properties/lists-pets 10
     etcdctl mk environments/dev/services/ms.chatrelay/1.0.0/config/properties/max-chat-users 5
+    etcdctl mk environments/dev/services/ms.chatroom/1.0.0/config/properties/max-rooms 15
     etcdctl mk environments/dev/services/ms.images/1.0.0/config/properties/max-size 2000000
     etcdctl mk environments/dev/services/ms.wall/1.0.0/config/properties/max-wall-posts 5
 
