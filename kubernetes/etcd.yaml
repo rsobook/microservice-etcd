@@ -4,6 +4,9 @@ metadata:
   name: ms-etcd
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: ms-etcd
   template:
     metadata:
       labels:
