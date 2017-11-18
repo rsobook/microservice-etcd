@@ -13,14 +13,14 @@ echo ""
     echo ""
     echo "Prepopulating values"
 
-    etcdctl mk environments/dev/services/ms.ads/1.0.0/config/properties/ads-enabled false
-    etcdctl mk environments/dev/services/ms.user/1.0.0/config/properties/lists-users 10
-    etcdctl mk environments/dev/services/ms.friends/1.0.0/config/properties/lists-friends 10
-    etcdctl mk environments/dev/services/ms.pet/1.0.0/config/properties/lists-pets 10
-    etcdctl mk environments/dev/services/ms.chatrelay/1.0.0/config/properties/max-chat-users 5
-    etcdctl mk environments/dev/services/ms.chatroom/1.0.0/config/properties/max-rooms 15
-    etcdctl mk environments/dev/services/ms.images/1.0.0/config/properties/max-size 2000000
-    etcdctl mk environments/dev/services/ms.wall/1.0.0/config/properties/max-wall-posts 5
+    etcdctl mk environments/dev/services/ms-ads/2.0.0/config/properties/ads-enabled false
+    etcdctl mk environments/dev/services/ms-user/2.0.0/config/properties/lists-users 10
+    etcdctl mk environments/dev/services/ms-friends/2.0.0/config/properties/lists-friends 10
+    etcdctl mk environments/dev/services/ms-pet/2.0.0/config/properties/lists-pets 10
+    etcdctl mk environments/dev/services/ms-chatrelay/2.0.0/config/properties/max-chat-users 5
+    etcdctl mk environments/dev/services/ms-chatroom/2.0.0/config/properties/max-rooms 15
+    etcdctl mk environments/dev/services/ms-images/2.0.0/config/properties/max-size 2000000
+    etcdctl mk environments/dev/services/ms-wall/2.0.0/config/properties/max-wall-posts 5
 
     echo ""
     echo "Current keys and values:"

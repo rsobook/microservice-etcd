@@ -10,7 +10,7 @@ buildscript {
 
 apply plugin: 'com.bmuschko.docker-remote-api'
 
-version = '1.0.0'
+version = '2.0.0'
 
 ext {
     dockerHubUser =  project.hasProperty('DOCKER_HUB_USER') ? DOCKER_HUB_USER : System.getenv('DOCKER_HUB_USER')
