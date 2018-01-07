@@ -16,6 +16,8 @@ echo ""
     etcdctl mk environments/dev/services/ms-ads/2.0.0/config/properties/ads-enabled false
     etcdctl mk environments/dev/services/ms-user/2.0.0/config/properties/lists-users 10
     etcdctl mk environments/dev/services/ms-friends/2.0.0/config/properties/lists-friends 10
+    etcdctl mk environments/dev/services/ms-friends/2.0.0/config/properties/user-api-host http://ms-user:80
+    etcdctl mk environments/dev/services/ms-friends/2.0.0/config/properties/user-api-host-discovery false
     etcdctl mk environments/dev/services/ms-pet/2.0.0/config/properties/lists-pets 10
     etcdctl mk environments/dev/services/ms-chatrelay/2.0.0/config/properties/max-chat-users 5
     etcdctl mk environments/dev/services/ms-chatroom/2.0.0/config/properties/max-rooms 15
